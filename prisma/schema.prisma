@@ -11,10 +11,19 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+enum Role {
+  user
+  admin
+}
+
+
 model Customer {
-  id        String   @id @unique @default(uuid())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                String   @id @unique @default(uuid())
+  email             String   @unique
+  password          String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  role              Role     @default(user)
+  verified          Boolean  @default(false)
+  verificationToken String   @default("")
 }
